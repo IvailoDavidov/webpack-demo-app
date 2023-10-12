@@ -7,4 +7,7 @@ import "./main.scss";
 const alertService = new AlertService();
 const componentService = new ComponentService();
 run(alertService, componentService);
+console.log("Yey");
+console.log("Yey");
+console.log("Yey");
 //alert("Hello from Webpack")
