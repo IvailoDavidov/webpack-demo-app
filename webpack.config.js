@@ -1,7 +1,10 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: {
+    main: "./src/index.js",
+    vendor: "./src/vendor.js",
+  },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/template.html",
@@ -22,15 +25,27 @@ module.exports = {
         use: ["html-loader"],
       },
       {
-        test: /\.(svg|png|jpg|gif)$/,
+        test: /\.(svg|png|jpg|gif|jpeg)$/i,
+        type: "asset/resource",
+        // use: {
+        //   loader: "file-loader",
+        //   options: {
+        //     name: "[name].[ext]",
+        //     outputPath: "assets",
+        //   },
+        // },
+      },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
         use: {
-          loader: "file-loader",
+          loader: "babel-loader",
           options: {
-            name: "[name].[hash].[ext]",
-            outputPath: "imgs",
+            presets: ["@babel/preset-env"],
           },
         },
       },
     ],
   },
+  // devtool: "source-map",
 };
